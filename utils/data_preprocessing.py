@@ -38,6 +38,7 @@ def pre_process_extract(input_file='./Data/llmrawdata.txt', output_file='lmproce
     df = df.drop(columns=columns_to_drop)
     df['dequeue_action'] = df['dequeue_action'] - 1    
     os.remove('lmprocesseddata.txt')
+    df.to_csv("exp_pool.csv")
     return df
 
 def trim_df(df, trim_percent=0.2):
