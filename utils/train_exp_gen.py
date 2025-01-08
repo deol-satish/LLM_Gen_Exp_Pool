@@ -4,7 +4,7 @@ import pickle
 from utils.exp_pool import ExperiencePool
 columns_to_use = [
     'queue_type', 'burst_allowance', 'drop_probability', 'current_queue_delay',
-    'accumulated_probability', 'average_dequeue_time', 'length_in_bytes', 'total_drops', 'packet_length'
+    'accumulated_probability', 'length_in_bytes', 'packet_length'
 ]
 
 def gen_train_exp_pool(df, pickle_save_path='exp_pool_l4s_train.pkl', train_exp_percent=0.2, window_size=5):
