@@ -16,7 +16,8 @@ def gen_eval_exp_pool(df, pickle_save_path='exp_pool_l4s_eval.pkl', eval_exp_per
 
     for index, row in df.iterrows():
         state = np.array(row[columns_to_use], dtype=np.float32)
-        exp_pool.add(state=state, action=row['dequeue_action'], reward=row['current_queue_delay'], done=0)
+        cal_reward = float(row['packet_length'] / float(row['current_queue_delay'] + 1000))
+        exp_pool.add(state=state, action=row['dequeue_action'], reward=cal_reward, done=0)
         
         if index > df.shape[0] * eval_exp_percent:
             break

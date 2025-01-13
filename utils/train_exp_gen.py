@@ -24,7 +24,8 @@ def gen_train_exp_pool(df, pickle_save_path='exp_pool_l4s_train.pkl', train_exp_
             selected_rows = df.iloc[start_index:end_index]
             for _, selected_row in selected_rows.iterrows():
                 state = np.array(selected_row[columns_to_use], dtype=np.float32)
-                exp_pool.add(state=state, action=selected_row['dequeue_action'], reward=selected_row['current_queue_delay'], done=0)
+                cal_reward = float(selected_row['packet_length'] / float(selected_row['current_queue_delay'] + 1000))
+                exp_pool.add(state=state, action=selected_row['dequeue_action'], reward=cal_reward, done=0)
         
         if index > df.shape[0] * train_exp_percent:
             break
